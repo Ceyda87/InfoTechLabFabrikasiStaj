@@ -1,0 +1,49 @@
+﻿﻿@using InfoTechLabProjeFabrikasi.Code;
+@using InfoTechLabProjeFabrikasi.Models;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@model IEnumerable<PlatformItemViewModel>
+@inject IListService lstSrv 
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<form action="Search">
+
+    <div class="row">
+        <div class="col">
+            <input name="Name" class="form-control" autocomplete="off" />
+        </div>
+        <div class="col">
+            <select name="CategoryId" class="form-control" asp-items="lstSrv.GetCategoryList()">
+                <option>Please Select a Category</option>
+            </select>
+        </div>
+        <div class="col">
+            <select name="AuthorId" class="form-control" asp-items="lstSrv.GetExpertList()">
+                <option>Please Select an Expert</option>
+            </select>
+        </div>
+        <div class="col">
+            <select name="PublisherID" class="form-control" asp-items="lstSrv.GetCustomerList()">
+                <option>Please Select a Customer</option>
+            </select>
+        </div>
+        <div class="col">
+            <input value="Search" type="submit" class="btn btn-secondary" />
+        </div>
+    </div>
+
+
+</form>
+
+            @foreach (var item in Model)
+            {
+
+                @Html.PartialAsync("_PlatformItem", item)
+                ;
+            }
+
+        
+    
